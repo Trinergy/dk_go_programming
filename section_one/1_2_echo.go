@@ -39,8 +39,8 @@ func echoWithJoin() {
 }
 
 func main() {
-	// simpleEcho()
-	// argZeroEcho()
-	// echoWithIndex()
-	// echoWithJoin()
+	simpleEcho()
+	argZeroEcho()
+	echoWithIndex()
+	echoWithJoin()
 }
