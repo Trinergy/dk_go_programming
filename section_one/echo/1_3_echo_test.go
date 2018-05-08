@@ -6,12 +6,12 @@ import (
 
 func BenchmarkSimpleEcho(b *testing.B) {
 	for i := 0; i < b.N; i++ {
-		simpleEcho()
+		SimpleEcho()
 	}
 }
 
 func BenchmarkEchoWithJoin(b *testing.B) {
 	for i := 0; i < b.N; i++ {
-		echoWithJoin()
+		WithJoin()
 	}
 }

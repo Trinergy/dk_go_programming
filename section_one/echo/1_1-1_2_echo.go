@@ -40,3 +40,7 @@ func WithIndex() {
 func WithJoin() {
 	fmt.Println(strings.Join(os.Args[1:], " "))
 }
+
+func main() {
+	SimpleEcho()
+}

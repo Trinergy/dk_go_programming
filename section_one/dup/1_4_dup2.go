@@ -43,3 +43,7 @@ func countLines(file *os.File, counts map[string]map[string]int) {
 	}
 	// NOTE: ignoring errors from input.Err()
 }
+
+func main() {
+	countDuplicatesInFiles()
+}
