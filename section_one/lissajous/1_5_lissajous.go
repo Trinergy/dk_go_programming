@@ -8,7 +8,6 @@ import (
 	"io"
 	"math"
 	"math/rand"
-	"os"
 )
 
 var palette = []color.Color{color.Black, color.RGBA{0x44, 0xff, 0xff, 0xff}}
@@ -18,11 +17,7 @@ const (
 	blackIndex = 1 // next color in palette
 )
 
-func main() {
-	lissajous(os.Stdout)
-}
-
-func lissajous(out io.Writer) {
+func lissajous(out io.Writer, cycleInput *int) {
 	const (
 		cycles  = 5     // number of complete x oscillator revolutions
 		res     = 0.001 // angular resolution
@@ -30,6 +25,9 @@ func lissajous(out io.Writer) {
 		nframes = 64    // number of animation frames
 		delay   = 8     // delay between frames in 10ms units
 	)
+	if cycleInput == nil {
+		*cycleInput = cycles
+	}
 	freq := rand.Float64() * 3.0 // relative frequency of y oscillator
 	anim := gif.GIF{LoopCount: nframes}
 	phase := 0.0 // phase difference
