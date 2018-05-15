@@ -2,7 +2,6 @@
 package main
 
 import (
-	"errors"
 	"fmt"
 	"math"
 )
@@ -26,21 +25,25 @@ func main() {
 		for j := 0; j < cells; j++ {
 			ax, ay, err := corner(i+1, j)
 			if err != nil {
+				fmt.Println(err)
 				continue
 			}
 
 			bx, by, err := corner(i, j)
 			if err != nil {
+				fmt.Println(err)
 				continue
 			}
 
 			cx, cy, err := corner(i, j+1)
 			if err != nil {
+				fmt.Println(err)
 				continue
 			}
 
 			dx, dy, err := corner(i+1, j+1)
 			if err != nil {
+				fmt.Println(err)
 				continue
 			}
 
@@ -60,7 +63,7 @@ func corner(i, j int) (float64, float64, error) {
 	// Compute surface height z.
 	z := f(x, y)
 	if math.IsInf(z, 0) {
-		err = errors.New("invalid polygon: infinite float")
+		err = fmt.Errorf("invalid polygon: infinite float x: %g, y: %g", x, y)
 	}
 
 	// Project (x,y,z) isometrically onto 2-D SVG canvas (sx,sy).
