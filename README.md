@@ -11,3 +11,7 @@ Ch 3
 3.6 (need more math)
 3.7 (need more math)
 3.8 (need more math)
+
+3.10 - optimize
+3.11
+3.12 - handle phrases + caps
