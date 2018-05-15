@@ -6,18 +6,22 @@ import (
 	"log"
 	"math"
 	"net/http"
+	"strconv"
 
 	"github.com/ajstarks/svgo"
 )
 
-const (
-	width, height = 600, 320            // canvas size in pixels
-	cells         = 100                 // number of grid cells
-	xyrange       = 30.0                // axis ranges (-xyrange..+xyrange)
+var (
+	width, height = 600.0, 320.0        // canvas size in pixels
 	xyscale       = width / 2 / xyrange // pixels per x or y unit
 	zscale        = height * 0.4        // pixels per z unit
-	angle         = math.Pi / 6         // angle of x, y axes (=30°)
-	defaultStyle  = "stroke: grey; fill: white; stroke-width: 0.7"
+)
+
+const (
+	cells        = 100         // number of grid cells
+	xyrange      = 30.0        // axis ranges (-xyrange..+xyrange)
+	angle        = math.Pi / 6 // angle of x, y axes (=30°)
+	defaultStyle = "stroke: grey; fill: white; stroke-width: 0.7"
 )
 
 var sin30, cos30 = math.Sin(angle), math.Cos(angle) // sin(30°), cos(30°)
@@ -29,7 +33,6 @@ func main() {
 
 // PrintSurface prints an SVG rendering of a 3-D surface
 func PrintSurface(s *svg.SVG) {
-	s.Start(width, height)
 	for i := 0; i < cells; i++ {
 		for j := 0; j < cells; j++ {
 			ax, ay, err := corner(i+1, j)
@@ -76,11 +79,29 @@ func PrintSurface(s *svg.SVG) {
 	}
 }
 
-// handler echoes the Path component of the requested URL.
+// handler prints the SVG of the requested URL.
 func handler(w http.ResponseWriter, r *http.Request) {
-	// q := r.URL.Query()
 	w.Header().Set("Content-Type", "image/svg+xml")
+
+	q := r.URL.Query()
+	if queryWidth := q.Get("width"); queryWidth != "" {
+		w, err := strconv.ParseFloat(queryWidth, 64)
+		if err != nil {
+			fmt.Printf("Invalid Width input: %v | err: %v", w, err)
+		}
+		width = w
+	}
+
+	if queryHeight := q.Get("height"); queryHeight != "" {
+		h, err := strconv.ParseFloat(queryHeight, 64)
+		if err != nil {
+			fmt.Printf("Invalid Height input: %v | err: %v", h, err)
+		}
+		height = h
+	}
+
 	s := svg.New(w)
+	s.Start(int(width), int(height))
 	PrintSurface(s)
 	s.End()
 }
