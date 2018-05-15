@@ -54,7 +54,7 @@ func PrintSurface(s *svg.SVG) {
 				fmt.Println(err)
 				continue
 			}
-			s.Polygon([]int{ax, bx, cx, dx}, []int{ay, by, cy, dy})
+			s.Polygon([]int{ax, bx, cx, dx}, []int{ay, by, cy, dy}, "stroke: grey; fill: white; stroke-width: 0.7")
 		}
 	}
 }
