@@ -5,7 +5,7 @@ import (
 	"os"
 	"strconv"
 
-	"github.com/Trinergy/dk_go_programming/section_two/length_conv"
+	"github.com/Trinergy/dk_go_programming/section_2/length_conv"
 )
 
 // 2-2 is an example of package imports
