@@ -40,10 +40,11 @@ func commaBytes(s string) string {
 
 	for i := range s {
 		if counter == 3 {
-			buf.WriteString(fmt.Sprintf(",%s", string(s[i])))
+			buf.WriteString(",")
+			buf.WriteByte(s[i])
 			counter = 1
 		} else {
-			buf.WriteString(fmt.Sprintf("%s", string(s[i])))
+			buf.WriteByte(s[i])
 			counter++
 		}
 	}
