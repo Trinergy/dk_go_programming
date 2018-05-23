@@ -18,10 +18,10 @@ var (
 )
 
 const (
-	cells        = 100         // number of grid cells
-	xyrange      = 30.0        // axis ranges (-xyrange..+xyrange)
-	angle        = math.Pi / 6 // angle of x, y axes (=30°)
-	defaultStyle = "stroke: grey; fill: white; stroke-width: 0.7"
+	cells   = 100         // number of grid cells
+	xyrange = 30.0        // axis ranges (-xyrange..+xyrange)
+	angle   = math.Pi / 6 // angle of x, y axes (=30°)
+	style   = "stroke: grey; fill: white; stroke-width: 0.7"
 )
 
 var sin30, cos30 = math.Sin(angle), math.Cos(angle) // sin(30°), cos(30°)
@@ -73,7 +73,7 @@ func PrintSurface(s *svg.SVG) {
 			if useCustomStyle {
 				s.Polygon(xs, ys, customStyle)
 			} else {
-				s.Polygon(xs, ys, defaultStyle)
+				s.Polygon(xs, ys, style)
 			}
 		}
 	}
